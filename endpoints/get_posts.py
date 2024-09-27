@@ -3,10 +3,11 @@ from typing import List
 import allure
 
 from endpoints.base_api import BaseApi
+from data import constants
 
 
 class GetPosts(BaseApi):
-    _endpoint = '/posts'
+    _endpoint = constants.POSTS_ENDPOINT
 
     @allure.step('Get all user\'s posts')
     def get_user_posts(self, user_id: int) -> List:

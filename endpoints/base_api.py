@@ -1,14 +1,18 @@
+import os
 from typing import Dict, List
 
 import allure
 import requests
+import dotenv
 from requests import Response
 
-DEFAULT_HEADERS = {'Content-type': 'application/json'}
+from data import constants
+
+dotenv.load_dotenv(override=True)
 
 
 class BaseApi:
-    __base_url = 'https://jsonplaceholder.typicode.com'
+    __base_url = os.getenv('BASE_URL')
     _endpoint: str
     _response: Response
 
@@ -22,7 +26,7 @@ class BaseApi:
         self.__run_request('GET', url, *args, **kwargs)
 
     def _post(self, url: str, payload: Dict, headers: Dict = None, *args, **kwargs):
-        headers = headers if headers else DEFAULT_HEADERS
+        headers = headers if headers else constants.DEFAULT_HEADERS
         self.__run_request('POST', url, *args, json=payload, headers=headers, **kwargs)
 
     @allure.step('Check response status')
