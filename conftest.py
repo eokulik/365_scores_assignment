@@ -4,6 +4,7 @@ import pytest
 
 from endpoints.get_users import GetUsers
 from endpoints.get_posts import GetPosts
+from endpoints.create_post import CreatePost
 
 
 @pytest.fixture(scope='session')
@@ -23,3 +24,8 @@ def get_users_endpoint():
 @pytest.fixture()
 def get_posts_endpoint():
     return GetPosts()
+
+
+@pytest.fixture()
+def create_post_endpoint():
+    return CreatePost()

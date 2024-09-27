@@ -18,12 +18,12 @@ class BaseApi:
     def __run_request(self, method: str, *args, **kwargs) -> None:
         self._response = requests.request(method, *args, **kwargs)
 
-    def _get(self, *args, **kwargs) -> None:
-        self.__run_request('GET', *args, **kwargs)
+    def _get(self, url: str, *args, **kwargs) -> None:
+        self.__run_request('GET', url, *args, **kwargs)
 
-    def _post(self, payload: Dict, headers: Dict = None, *args, **kwargs):
+    def _post(self, url: str, payload: Dict, headers: Dict = None, *args, **kwargs):
         headers = headers if headers else DEFAULT_HEADERS
-        self.__run_request('POST', *args, json=payload, headers=headers, **kwargs)
+        self.__run_request('POST', url, *args, json=payload, headers=headers, **kwargs)
 
     @allure.step('Check response status')
     def check_response_status_is_(self, code: int) -> None:
