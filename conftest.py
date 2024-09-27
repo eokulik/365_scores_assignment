@@ -3,6 +3,7 @@ import random
 import pytest
 
 from endpoints.get_users import GetUsers
+from endpoints.get_posts import GetPosts
 
 
 @pytest.fixture(scope='session')
@@ -17,3 +18,8 @@ def user_id():
 @pytest.fixture()
 def get_users_endpoint():
     return GetUsers()
+
+
+@pytest.fixture()
+def get_posts_endpoint():
+    return GetPosts()

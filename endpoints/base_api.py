@@ -8,7 +8,7 @@ DEFAULT_HEADERS = {'Content-type': 'application/json'}
 
 
 class BaseApi:
-    __base_url = 'https://jsonplaceholder.typicode.com/'
+    __base_url = 'https://jsonplaceholder.typicode.com'
     _endpoint: str
     _response: Response
 
