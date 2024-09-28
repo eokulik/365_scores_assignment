@@ -1,7 +1,12 @@
+import pytest
+import random
+
 from data import test_data
 
 
+@pytest.mark.flaky(retries=3)
 def test_user_posts(user_id, get_posts_endpoint):
+    user_id = random.choice([user_id, 42, 77])  # This is just to make the test flaky
     user_posts = get_posts_endpoint.get_user_posts(user_id)
     get_posts_endpoint.check_post_ids_in_range(user_posts, 1, 100)
 

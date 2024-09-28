@@ -25,14 +25,14 @@ class GetPosts(BaseApi):
 
     @staticmethod
     def check_post_ids_in_range(posts: List, range_from: int, range_to: int):
-        posts_ids = map(lambda post: post.id, posts)
+        posts_ids = list(map(lambda post: post.id, posts))
         try:
-            assert all(map(lambda post_id: post_id in range(range_from, range_to + 1), posts_ids)), \
-                f'not all the post IDs are in range {range_from} - {range_to}'
+            assert posts_ids and all(map(lambda post_id: post_id in range(range_from, range_to + 1), posts_ids)), \
+                f'not all the post IDs are in range {range_from} - {range_to}, posts: {posts_ids}'
             logging.info('All post IDs are in range %s - %s', range_from, range_to)
         except AssertionError as err:
             logging.exception(
-                f'not all the post IDs are in range %s - %s, post IDs: %s',
+                'not all the post IDs are in range %s - %s, post IDs: %s',
                 range_from, range_to, posts_ids
             )
             raise err
