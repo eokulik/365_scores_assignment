@@ -1,0 +1,4 @@
+name,id,title,body
+valid,correct string,simple title,simple body
+valid,empty string,  ,
+valid,special symbols,!@#$%^&*(),!@#$%^&*()
