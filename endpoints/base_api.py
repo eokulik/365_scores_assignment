@@ -1,6 +1,7 @@
 import os
 import logging
 from typing import Dict, List
+from abc import abstractmethod
 
 import allure
 import requests
@@ -64,3 +65,7 @@ class BaseApi:
         except JSONDecodeError as err:
             logging.exception('Failed to decode JSON from the response: %s', self._response.text)
             raise err
+
+    @abstractmethod
+    def data(self) -> object | List[object]:
+        pass

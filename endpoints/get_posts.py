@@ -4,6 +4,7 @@ from typing import List
 import allure
 
 from endpoints.base_api import BaseApi
+from endpoints.models.post import Post
 from data import constants
 
 logging.getLogger(__name__)
@@ -15,7 +16,7 @@ class GetPosts(BaseApi):
     @allure.step('Get all user\'s posts')
     def get_user_posts(self, user_id: int) -> List:
         self._get(self._url)
-        user_posts = filter(lambda post: post['userId'] == user_id, self.response_json)
+        user_posts = list(filter(lambda post: post.userId == user_id, self.data()))
         if user_posts:
             logging.info('User\'s posts fetched: %s', user_posts)
         else:
@@ -24,7 +25,7 @@ class GetPosts(BaseApi):
 
     @staticmethod
     def check_post_ids_in_range(posts: List, range_from: int, range_to: int):
-        posts_ids = map(lambda post: post['id'], posts)
+        posts_ids = map(lambda post: post.id, posts)
         try:
             assert all(map(lambda post_id: post_id in range(range_from, range_to + 1), posts_ids)), \
                 f'not all the post IDs are in range {range_from} - {range_to}'
@@ -35,3 +36,7 @@ class GetPosts(BaseApi):
                 range_from, range_to, posts_ids
             )
             raise err
+
+    def data(self) -> List[object]:
+        posts = list(map(lambda post: Post(**post), self.response_json))
+        return posts
