@@ -1,0 +1,1 @@
+I would delete the post with id 101 if it was not a mock API

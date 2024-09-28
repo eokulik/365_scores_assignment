@@ -24,6 +24,7 @@ class GetPosts(BaseApi):
         return user_posts
 
     @staticmethod
+    @allure.step('Check that all users post IDs are in the given range')
     def check_post_ids_in_range(posts: List, range_from: int, range_to: int):
         posts_ids = list(map(lambda post: post.id, posts))
         try:

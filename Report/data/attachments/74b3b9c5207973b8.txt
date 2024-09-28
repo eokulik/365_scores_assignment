@@ -1,0 +1,11 @@
+[32mINFO    [0m root:base_api.py:30 Request run: url https://jsonplaceholder.typicode.com/posts, method POST, (), {'json': {'title': '  ', 'body': '', 'userId': 9}, 'headers': {'Content-type': 'application/json'}}, response status: 201
+[32mINFO    [0m root:create_post.py:19 Post created with payload {'title': '  ', 'body': '', 'userId': 9}
+[32mINFO    [0m root:base_api.py:64 Received data: {'title': '  ', 'body': '', 'userId': 9, 'id': 101}
+[32mINFO    [0m root:base_api.py:52 Status code 201 matches the expected one 201
+[32mINFO    [0m root:base_api.py:64 Received data: {'title': '  ', 'body': '', 'userId': 9, 'id': 101}
+[32mINFO    [0m root:create_post.py:29 Title "  " is correct
+[32mINFO    [0m root:base_api.py:64 Received data: {'title': '  ', 'body': '', 'userId': 9, 'id': 101}
+[32mINFO    [0m root:create_post.py:36 User id 9 is correct
+[32mINFO    [0m root:base_api.py:64 Received data: {'title': '  ', 'body': '', 'userId': 9, 'id': 101}
+[32mINFO    [0m root:create_post.py:45 Body "" is correct
+[32mINFO    [0m root:conftest.py:41 Post with id 101 deleted

@@ -23,6 +23,7 @@ class BaseApi:
     def __init__(self):
         self._url = self.__base_url + self._endpoint
 
+    @allure.step('Run request')
     def __run_request(self, method: str, url: str,  *args, **kwargs) -> None:
         try:
             self._response = requests.request(method, url, *args, **kwargs)

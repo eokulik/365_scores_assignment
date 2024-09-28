@@ -1,5 +1,7 @@
 import logging
-from typing import Dict, List
+from typing import Dict
+
+import allure
 
 from endpoints.base_api import BaseApi
 from endpoints.models.post import Post
@@ -11,6 +13,7 @@ logging.getLogger(__name__)
 class CreatePost(BaseApi):
     _endpoint = constants.POSTS_ENDPOINT
 
+    @allure.step('Create a post')
     def create_post(self, payload: Dict) -> None:
         self._post(self._url, payload)
         logging.info('Post created with payload %s', payload)
@@ -18,6 +21,7 @@ class CreatePost(BaseApi):
     def data(self) -> Post:
         return Post(**self.response_json)
 
+    @allure.step('Check that post response body contains the same data as was sent')
     def check_post_content(self, title: str, body: str, user_id: int):
         try:
             assert self.data().title == title, \
@@ -43,3 +47,4 @@ class CreatePost(BaseApi):
             logging.exception(
                 'Body "%s" doesn\'t correspond to the expected one "%s"', self.data().body == body, body
             )
+            raise err
