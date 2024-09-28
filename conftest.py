@@ -1,4 +1,5 @@
 import random
+import datetime
 
 import pytest
 
@@ -29,3 +30,9 @@ def get_posts_endpoint():
 @pytest.fixture()
 def create_post_endpoint():
     return CreatePost()
+
+
+def pytest_configure(config):
+    if not config.option.log_file:
+        timestamp = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d_%H-%M-%S')
+        config.option.log_file = f'logs/api_tests_{timestamp}.log'
